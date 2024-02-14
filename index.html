@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			/* Estilo para el botón */
+
+			* {
+				font-family: 'Roboto', sans-serif;
+				font-weight: 500;
+				font-style: normal;
+				font-size: large;
+			}
+
+			.container {
+				background-color: #fcfcfc;
+				width: 100vw;
+				height: 20vh;
+				/* padding: 0;
+        margin: 0 auto; */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: row;
+			}
+
+			.container-light {
+				background-color: #fcfcfc;
+				height: 30vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+			}
+
+			.button {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				width: max-content;
+				padding: 1rem;
+				margin-left: 1rem;
+				margin-right: 1rem;
+				/* padding-top: 0; */
+
+				color: white;
+				border: none;
+				border-radius: 5px;
+
+				cursor: pointer;
+			}
+
+			.absolute {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.red {
+				background-color: red;
+			}
+
+			.green {
+				background-color: chartreuse;
+			}
+		</style>
+	</head>
+	<body> 
+		<div class="container-light" style="height: 15vh;">
+			
+		</div>
+		<div class="container-light">
+			<img
+				id="gif"
+				style="width: 200px"
+				src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif"
+			/>
+			<h1 id="titulo" style="font-size: 2rem">Seras mi oficial ojitos?</h1>
+		</div>
+		<div id="contenedorBtns" class="container">
+			<div id="botonSi" class="green button" onclick="siQuiero()">
+				Si quiero
+			</div>
+			<div id="botonNo" class="red button" onclick="moverBoton()"></div>
+		</div>
+
+		<script>
+			let textosNegativos = [
+				'No quiero',
+				'Estas segura?',
+				'100% ?',
+				'anda ojitos...',
+				'solo piensalo un segundo si?',
+				'si dices que no, voy a estar triste',
+				'muy triste',
+				'muy muy triste...',
+				'muy muy muy triste...',
+				'muy muy muy muy triste...',
+				'okay, si es lo que quieres...',
+				'era joda, ANDA DI QUE SI',
+				'muy muy muy muy muy muy triste...',
+				'estas rompiendo mi corazon :(',
+			];
+
+			let botonNo = document.getElementById('botonNo');
+			let botonSi = document.getElementById('botonSi');
+			let body = document.getElementsByTagName('body');
+
+			let aux = true;
+
+			let i = 0;
+			let iplus = 0;
+			botonNo.innerHTML = textosNegativos[0];
+
+			// setInterval(() => {
+			//   console.log(botonNo.innerHTML)
+			// }, 1000);
+
+			function siQuiero() {
+				console.log(document.getElementById('gif').src);
+				document.getElementById('gif').src =
+					'https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif';
+				botonSi.remove();
+				botonNo.remove();
+        document.getElementById('titulo').innerHTML = 'SIIIII'
+
+			}
+
+			function moverBoton() {
+				// if (aux) {
+				// 	botonNo.className += ' absolute';
+				// 	aux = false;
+				// }
+
+				// Calcula posiciones aleatorias
+				// const maxX = window.innerWidth - botonNo.clientWidth;
+				// const maxY = window.innerHeight - botonNo.clientHeight;
+				// const randomX = Math.floor(Math.random() * maxX);
+				// const randomY = Math.floor(Math.random() * maxY);
+
+				// // Aplica las posiciones aleatorias al botón
+				// botonNo.style.left = `${randomX}px`;
+				// botonNo.style.top = `${randomY}px`;
+
+				// Incrementa el tamaño del botón
+
+				const factorCrecimiento = 0.91;
+				const factorCrecimientoLetra = 1.05;
+				const nuevoAncho = botonSi.clientWidth * factorCrecimiento; // Aumenta en un 10%
+				const nuevoAlto = botonSi.clientHeight * factorCrecimiento;
+				botonSi.style.width = `${nuevoAncho}px`;
+				botonSi.style.height = `${nuevoAlto}px`;
+				botonSi.style.fontSize = `${
+					parseFloat(window.getComputedStyle(botonSi).fontSize) *
+					factorCrecimientoLetra
+				}px`;
+
+				// cambio el texto del boton
+
+				i++;
+				iplus++;
+				console.log(iplus);
+
+				if (i >= textosNegativos.length) i = 0;
+				if (iplus >= 35) {
+					botonNo.remove();
+					console.log('removido');
+				}
+				botonNo.innerHTML = textosNegativos[i];
+			}
+		</script>
+	</body>
+</html>
